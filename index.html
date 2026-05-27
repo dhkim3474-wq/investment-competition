@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ 틴즈 투자 서바이벌 (Teens Investment Survival)</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Intuitive Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Modern Design System & Variables */
+        :root {
+            --primary: #6366f1;       /* Electric Violet */
+            --primary-dark: #4f46e5;
+            --secondary: #312e81;     /* Deep Space Indigo */
+            --accent: #10b981;        /* Bright Emerald */
+            --accent-red: #ef4444;    /* Coral Red */
+            --warning: #f59e0b;       /* Sunset Gold */
+            --bg-gradient: linear-gradient(135deg, #f5f7ff 0%, #e4ebfe 100%);
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        /* Standardized Screen Containers */
+        .game-wrapper {
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(49, 46, 129, 0.12);
+            width: 100%;
+            max-width: 800px;
+            min-height: 640px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Screen States Control */
+        .screen {
+            display: none;
+            flex-direction: column;
+            padding: 40px;
+            flex-grow: 1;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 1. TUTORIAL SCREEN (Intro & Rules) */
+        .tutorial-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tutorial-header .logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tutorial-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .tutorial-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .mentor-intro {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .mentor-avatar {
+            font-size: 32px;
+        }
+
+        .mentor-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .rule-section {
+            margin-bottom: 30px;
+        }
+
+        .rule-section h3 {
+            font-size: 18px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .product-card-desc {
+            background: #fafaf9;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .product-card-desc strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+            margin-left: 5px;
+        }
+
+        .badge-safe { background-color: var(--accent); }
+        .badge-mid { background-color: var(--warning); }
+        .badge-danger { background-color: var(--accent-red); }
+
+        .btn-start {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            text-align: center;
+        }
+
+        .btn-start:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        /* 2. MAIN GAME SCREEN */
+        .game-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 25px;
+        }
+
+        .round-badge {
+            background: var(--secondary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .asset-tracker {
+            text-align: right;
+        }
+
+        .asset-tracker span {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .asset-tracker strong {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        /* News Section */
+        .news-flash {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 6px solid var(--warning);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-tag {
+            background: var(--warning);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .news-flash h4 {
+            font-size: 14px;
+            color: #b45309;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .news-flash p {
+            font-size: 16px;
+            font-weight: 700;
+            color: #78350f;
+            line-height: 1.5;
+        }
+
+        /* Remaining Cash Display */
+        .allocation-summary {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .allocation-summary span {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .allocation-summary strong {
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+
+        /* Investment Cards */
+        .investment-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .input-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .input-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.05);
+        }
+
+        .input-info h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+
+        .input-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .input-control {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .input-field-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field-wrapper input {
+            width: 160px;
+            padding: 10px 30px 10px 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: right;
+            outline: none;
+            color: var(--text-dark);
+        }
+
+        .input-field-wrapper input:focus {
+            border-color: var(--primary);
+        }
+
+        .input-field-wrapper .unit {
+            position: absolute;
+            right: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .quick-buttons {
+            display: flex;
+            gap: 4px;
+        }
+
+        .btn-quick {
+            background: #f1f5f9;
+            border: none;
+            color: #475569;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-quick:hover {
+            background: #e2e8f0;
+            color: var(--text-dark);
+        }
+
+        /* 3. REPORT MODAL / INTERMEDIATE SCREEN */
+        .report-box {
+            background: #fafafa;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .report-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+
+        .report-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .report-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .report-item .product-info h6 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .report-item .product-info span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .report-item .product-yield {
+            text-align: right;
+        }
+
+        .yield-badge {
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .yield-positive {
+            color: var(--accent);
+            background: #ecfdf5;
+        }
+
+        .yield-negative {
+            color: var(--accent-red);
+            background: #fef2f2;
+        }
+
+        .yield-neutral {
+            color: var(--text-muted);
+            background: #f8fafc;
+        }
+
+        .total-summary-card {
+            background: var(--secondary);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-summary-card span {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .total-summary-card strong {
+            font-size: 22px;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        /* 4. FINAL SCREEN (Results & Mentor Debriefing) */
+        .final-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .final-badge {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .final-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .final-result-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .final-stat {
+            text-align: center;
+        }
+
+        .final-stat span {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .final-stat strong {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .debriefing-card {
+            background: #f5f3ff;
+            border-radius: 16px;
+            padding: 24px;
+            border-left: 6px solid var(--primary);
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .debriefing-card h4 {
+            font-size: 16px;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .debriefing-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4c1d95;
+        }
+
+        .educational-takeaways {
+            text-align: left;
+            background: #fafaf9;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .educational-takeaways h5 {
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .educational-takeaways ul {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .educational-takeaways li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .educational-takeaways li::before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Utility classes */
+        .color-accent { color: var(--accent); }
+        .color-red { color: var(--accent-red); }
+    </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+
+    <!-- 1. TUTORIAL SCREEN (First View) -->
+    <div class="screen active" id="screen-tutorial">
+        <div class="tutorial-header">
+            <span class="logo">🎮</span>
+            <h1>틴즈 투자 서바이벌</h1>
+            <p>Teens Investment Survival Game</p>
+        </div>
+
+        <div class="mentor-intro">
+            <span class="mentor-avatar">🧑‍🏫</span>
+            <div class="mentor-text">
+                "반갑습니다! 저는 여러분의 AI 금융투자 멘토입니다. 투자는 요행이 아니라 세상의 변화를 읽는 안목입니다. 주어진 <strong>가상 자산 1,000만 원</strong>을 5년(5라운드) 동안 굴려보면서 최고의 투자 전문가로 성장해 볼까요?"
+            </div>
+        </div>
+
+        <div class="rule-section">
+            <h3><i class="fa-solid fa-scroll"></i> 게임 진행 규칙</h3>
+            <div class="product-grid">
+                <div class="product-card-desc">
+                    <strong>🏦 정기 예금 <span class="badge badge-safe">위험 낮음</span></strong>
+                    은행에 안전하게 돈을 맡겨 이자를 받는 상품입니다. 경제가 힘들고 위기가 찾아왔을 때 빛을 발합니다. (고정 연 2~6%)
+                </div>
+                <div class="product-card-desc">
+                    <strong>📊 대기업 ETF <span class="badge badge-mid">위험 중간</span></strong>
+                    국가 대표 기업 수십 군데의 주식을 골고루 묶어서 구매하는 상품입니다. 안정적인 시장의 평균 성장을 따라갑니다.
+                </div>
+                <div class="product-card-desc">
+                    <strong>⚡ 첨단 기술주 <span class="badge badge-danger">위험 높음</span></strong>
+                    AI, 로봇 등 미래 지향형 기술 기업들에 투자합니다. 거대한 트렌드를 타고 초대박이 날 수도 있지만 폭락의 위험도 큽니다.
+                </div>
+                <div class="product-card-desc">
+                    <strong>🌱 친환경 에너지 펀드 <span class="badge badge-mid">위험 중상</span></strong>
+                    전기차, 태양광 등 환경을 생각하는 혁신 기업들의 모음입니다. 전 지구적인 정부 정책과 기후 변화 뉴스에 큰 영향을 받습니다.
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-start" onclick="startGame()">첫 번째 라운드 시작하기! 🚀</button>
+    </div>
+
+    <!-- 2. GAME SCREEN -->
+    <div class="screen" id="screen-game">
+        <div class="game-nav">
+            <div class="round-badge"><span id="round-display">1</span> / 5 라운드</div>
+            <div class="asset-tracker">
+                <span>현재 나의 자산</span>
+                <strong id="assets-display">10,000,000 원</strong>
+            </div>
+        </div>
+
+        <!-- News Flash Box -->
+        <div class="news-flash">
+            <span class="news-tag">특종 뉴스</span>
+            <h4><i class="fa-solid fa-bullhorn"></i> 올해의 경제 동향 발표</h4>
+            <p id="news-text">1라운드: "전 세계 도시들이 전기·수소 버스로 전격 교체하는 기후 보호 조치를 승인하기 시작했습니다!"</p>
+        </div>
+
+        <!-- Allocation Tracker -->
+        <div class="allocation-summary">
+            <span>남은 투자 가능 금액</span>
+            <strong id="remains-display">10,000,000 원</strong>
+        </div>
+
+        <!-- Inputs Wrapper -->
+        <div class="investment-inputs">
+            <!-- 1. Savings -->
+            <div class="input-card">
+                <div class="input-info">
+                    <h5>🏦 정기 예금</h5>
+                    <p>안전하게 자산을 지키는 최후의 선택</p>
+                </div>
+                <div class="input-control">
+                    <div class="input-field-wrapper">
+                        <input type="number" id="input-saving" min="0" placeholder="0" oninput="calculateRemains()">
+                        <span class="unit">원</span>
+                    </div>
+                    <div class="quick-buttons">
+                        <button class="btn-quick" onclick="addMoney('saving', 1000000)">+100만</button>
+                        <button class="btn-quick" onclick="addMoney('saving', 5000000)">+500만</button>
+                        <button class="btn-quick" onclick="maxMoney('saving')">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ETF -->
+            <div class="input-card">
+                <div class="input-info">
+                    <h5>📊 대기업 ETF</h5>
+                    <p>주요 기업들이 분산 결집된 펀드 자산</p>
+                </div>
+                <div class="input-control">
+                    <div class="input-field-wrapper">
+                        <input type="number" id="input-etf" min="0" placeholder="0" oninput="calculateRemains()">
+                        <span class="unit">원</span>
+                    </div>
+                    <div class="quick-buttons">
+                        <button class="btn-quick" onclick="addMoney('etf', 1000000)">+100만</button>
+                        <button class="btn-quick" onclick="addMoney('etf', 5000000)">+500만</button>
+                        <button class="btn-quick" onclick="maxMoney('etf')">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Tech Stocks -->
+            <div class="input-card">
+                <div class="input-info">
+                    <h5>⚡ 첨단 기술주</h5>
+                    <p>미래 문명을 리드하는 기술적 도전에 배팅</p>
+                </div>
+                <div class="input-control">
+                    <div class="input-field-wrapper">
+                        <input type="number" id="input-tech" min="0" placeholder="0" oninput="calculateRemains()">
+                        <span class="unit">원</span>
+                    </div>
+                    <div class="quick-buttons">
+                        <button class="btn-quick" onclick="addMoney('tech', 1000000)">+100만</button>
+                        <button class="btn-quick" onclick="addMoney('tech', 5000000)">+500만</button>
+                        <button class="btn-quick" onclick="maxMoney('tech')">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Eco Stocks -->
+            <div class="input-card">
+                <div class="input-info">
+                    <h5>🌱 친환경 에너지 펀드</h5>
+                    <p>친환경 정책과 기술적 패러다임 변화에 투자</p>
+                </div>
+                <div class="input-control">
+                    <div class="input-field-wrapper">
+                        <input type="number" id="input-eco" min="0" placeholder="0" oninput="calculateRemains()">
+                        <span class="unit">원</span>
+                    </div>
+                    <div class="quick-buttons">
+                        <button class="btn-quick" onclick="addMoney('eco', 1000000)">+100만</button>
+                        <button class="btn-quick" onclick="addMoney('eco', 5000000)">+500만</button>
+                        <button class="btn-quick" onclick="maxMoney('eco')">최대</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-start" onclick="confirmInvestment()">올해의 투자 확정하기 📈</button>
+    </div>
+
+    <!-- 3. REPORT SCREEN -->
+    <div class="screen" id="screen-report">
+        <div class="report-box">
+            <h3 class="report-title">📝 연간 투자 정산 분석 보고서</h3>
+            <div class="report-list" id="report-items-container">
+                <!-- Dynamically populated report items -->
+            </div>
+            <div class="total-summary-card">
+                <span>총 자산 잔고</span>
+                <strong id="report-total-display">12,000,000 원</strong>
+            </div>
+        </div>
+
+        <div class="mentor-intro">
+            <span class="mentor-avatar">💡</span>
+            <div class="mentor-text" id="report-mentor-advice">
+                "좋은 자산 배분입니다. 시장 동향에 적응하는 속도가 아주 훌륭해요!"
+            </div>
+        </div>
+
+        <button class="btn-start" id="btn-next-step" onclick="proceedToNextRound()">다음 해(라운드) 진행하기 ➡️</button>
+    </div>
+
+    <!-- 4. FINAL RESULTS SCREEN -->
+    <div class="screen" id="screen-final">
+        <div class="final-box">
+            <span class="final-badge" id="final-icon">🏆</span>
+            <h2 class="final-title">서바이벌 종료!</h2>
+            <p>5년간의 모험 끝에 도달한 당신의 투자 레코드</p>
+
+            <div class="final-result-card">
+                <div class="final-stat">
+                    <span>최종 자산 잔고</span>
+                    <strong id="final-assets">15,000,000 원</strong>
+                </div>
+                <div class="final-stat">
+                    <span>누적 수익률</span>
+                    <strong id="final-yield">+50.0%</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="debriefing-card">
+            <h4><i class="fa-solid fa-graduation-cap"></i> AI 금융 전문가의 자산 분석 평가</h4>
+            <p id="debriefing-text">당신은 뛰어난 밸런스를 가진 현명한 자산 분배형 투자자입니다.</p>
+        </div>
+
+        <div class="educational-takeaways">
+            <h5>💡 틴즈를 위한 미래 금융 핵심 족보</h5>
+            <ul>
+                <li><strong>분산투자의 강력함:</strong> 기술주가 폭락했을 때 안정적인 정기예금이 여러분의 총 자산을 지켜주는 안전판 역할을 했습니다.</li>
+                <li><strong>하이 리스크, 하이 리턴:</strong> 변동성이 큰 기술주는 가장 화끈하지만, 자칫하면 한순간에 손실이 복구되지 않을 수 있으니 주의해야 해요.</li>
+                <li><strong>복리 효과의 시작:</strong> 매년 정산된 자산으로 새로운 라운드가 진행되어 이자가 계속 불어나 더 가파른 자산 형성이 이루어집니다.</li>
+            </ul>
+        </div>
+
+        <button class="btn-start" onclick="resetGame()">처음부터 다시 도전하기 🔄</button>
+    </div>
+
+</div>
+
+<script>
+    // State management variables
+    let currentRound = 1;
+    let totalAssets = 10000000;
+    const INITIAL_ASSETS = 10000000;
+
+    // Fixed 5-year investment simulation scenarios
+    const scenarios = [
+        { 
+            round: 1, 
+            news: '1라운드 [글로벌 탄소 중립화 가시화]: "전 세계 주요 메가 시티에서 매연 배출 버스를 금지하고 대중교통을 수소·전기 버스로 전격 전향합니다!"', 
+            rates: { saving: 0.02, etf: 0.05, tech: 0.10, eco: 0.35 },
+            advice: '친환경 법안 도입으로 친환경 에너지 펀드가 무려 +35%나 폭등했습니다! 세상의 흐름(정책)을 읽는 것이 얼마나 주효한지 실감하셨나요?'
+        },
+        { 
+            round: 2, 
+            news: '2라운드 [돌발 경제 충격 위기]: "예상치 못한 미지의 글로벌 바이러스 전염 유행으로 국경이 봉쇄되고 제조·소비 유통 업계가 큰 타격을 입었습니다."', 
+            rates: { saving: 0.02, etf: -0.15, tech: -0.35, eco: -0.10 },
+            advice: '경제가 얼어붙는 대폭락 위기가 도래했습니다. 주식과 펀드가 곤두박질치는 동안, 원금을 지켜주고 2% 이자를 차곡차곡 준 "정기 예금"이 아주 고마웠을 것입니다.'
+        },
+        { 
+            round: 3, 
+            news: '3라운드 [인공지능 대혁명]: "사용자와 완벽히 대화하며 일을 대행해주는 고도화된 생성형 AI 기술이 전 세계 스마트 기기에 본격 탑재되기 시작했습니다."', 
+            rates: { saving: 0.02, etf: 0.10, tech: 0.50, eco: 0.05 },
+            advice: '첨단 기술주가 폭발적인 이목을 끌며 +50%라는 대기록을 썼습니다! 트렌드를 일찍 알아채고 고위험 성장주를 선점한 과감한 투자자들에게 최고의 해였습니다.'
+        },
+        { 
+            round: 4, 
+            news: '4라운드 [초고금리 시대의 귀환]: "극심해진 물가 상승(인플레이션)을 억제하기 위해 중앙은행에서 기본 기준 이자율을 폭발적으로 인상했습니다."', 
+            rates: { saving: 0.06, etf: -0.05, tech: -0.15, eco: 0.00 },
+            advice: '은행 기본 금리가 상승하면서 "정기 예금" 이자율이 6%까지 뛰었습니다! 반면 기업들은 비싼 대출 이자 감당으로 주식시장이 소폭 위축되는 기이한 균형 현상을 보였습니다.'
+        },
+        { 
+            round: 5, 
+            news: '5라운드 [친환경 스마트 모빌리티 상용화]: "태양광 동력만을 사용하여 하늘을 가르는 친환경 도심형 모빌리티(UAM) 서비스가 첫 상업 비행 승인을 마쳤습니다!"', 
+            rates: { saving: 0.02, etf: 0.08, tech: 0.25, eco: 0.40 },
+            advice: '마지막 라운드는 친환경 기술의 결정체인 차세대 모빌리티 소식으로 친환경 펀드가 무려 +40% 치솟았습니다! 5년 동안 시장의 여러 부침을 모두 이겨내셨습니다.'
+        }
+    ];
+
+    // Screen transition helper
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(scr => scr.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    // Initialize Game state
+    function startGame() {
+        currentRound = 1;
+        totalAssets = INITIAL_ASSETS;
+        loadRound();
+        showScreen('screen-game');
+    }
+
+    // Load current round details
+    function loadRound() {
+        document.getElementById('round-display').innerText = currentRound;
+        document.getElementById('assets-display').innerText = totalAssets.toLocaleString() + " 원";
+        document.getElementById('news-text').innerText = scenarios[currentRound - 1].news;
+        
+        // Clear all input elements
+        document.getElementById('input-saving').value = "";
+        document.getElementById('input-etf').value = "";
+        document.getElementById('input-tech').value = "";
+        document.getElementById('input-eco').value = "";
+        
+        calculateRemains();
+    }
+
+    // Dynamic input checking and remaining balance tracker
+    function calculateRemains() {
+        const saving = parseInt(document.getElementById('input-saving').value) || 0;
+        const etf = parseInt(document.getElementById('input-etf').value) || 0;
+        const tech = parseInt(document.getElementById('input-tech').value) || 0;
+        const eco = parseInt(document.getElementById('input-eco').value) || 0;
+
+        const totalSpent = saving + etf + tech + eco;
+        const remaining = totalAssets - totalSpent;
+
+        const remainsDisplay = document.getElementById('remains-display');
+        remainsDisplay.innerText = remaining.toLocaleString() + " 원";
+
+        if (remaining < 0) {
+            remainsDisplay.style.color = "var(--accent-red)";
+        } else {
+            remainsDisplay.style.color = "var(--text-dark)";
+        }
+
+        return { saving, etf, tech, eco, remaining };
+    }
+
+    // Quick Button Helpers
+    function addMoney(target, amount) {
+        const input = document.getElementById(`input-${target}`);
+        const currentVal = parseInt(input.value) || 0;
+        input.value = currentVal + amount;
+        calculateRemains();
+    }
+
+    function maxMoney(target) {
+        const input = document.getElementById(`input-${target}`);
+        const { saving, etf, tech, eco } = calculateRemains();
+        const inputCurrent = parseInt(input.value) || 0;
+        const totalOtherSpent = (saving + etf + tech + eco) - inputCurrent;
+        
+        const possibleMax = totalAssets - totalOtherSpent;
+        input.value = possibleMax > 0 ? possibleMax : 0;
+        calculateRemains();
+    }
+
+    // Core validation and results parsing logic
+    function confirmInvestment() {
+        const { saving, etf, tech, eco, remaining } = calculateRemains();
+
+        if (remaining < 0) {
+            alert("❌ 가상 한도를 넘겼습니다! 가진 자산 이내로 투자 금액을 올바르게 배분해 주세요.");
+            return;
+        }
+
+        const scenario = scenarios[currentRound - 1];
+        
+        // Calculate dynamic gains per asset class
+        const resultSaving = Math.round(saving * (1 + scenario.rates.saving));
+        const resultEtf = Math.round(etf * (1 + scenario.rates.etf));
+        const resultTech = Math.round(tech * (1 + scenario.rates.tech));
+        const resultEco = Math.round(eco * (1 + scenario.rates.eco));
+        
+        // Remaining unallocated money is treated as cash with 0% interest rate
+        const resultCash = remaining; 
+
+        const previousRoundAssets = totalAssets;
+        totalAssets = resultSaving + resultEtf + resultTech + resultEco + resultCash;
+
+        // Render visual intermediate report
+        displayIntermediateReport(saving, etf, tech, eco, remaining, resultSaving, resultEtf, resultTech, resultEco, scenario);
+    }
+
+    function formatYield(rate) {
+        const percent = (rate * 100).toFixed(0);
+        return rate > 0 ? `+${percent}%` : `${percent}%`;
+    }
+
+    // Format output of annual performance breakdown
+    function displayIntermediateReport(s, et, te, ec, cash, rs, ret, rte, rec, scen) {
+        const listContainer = document.getElementById('report-items-container');
+        listContainer.innerHTML = ''; // Reset existing
+
+        const items = [
+            { name: "🏦 정기 예금", invested: s, outcome: rs, rate: scen.rates.saving },
+            { name: "📊 대기업 ETF", invested: et, outcome: ret, rate: scen.rates.etf },
+            { name: "⚡ 첨단 기술주", invested: te, outcome: rte, rate: scen.rates.tech },
+            { name: "🌱 친환경 에너지 펀드", invested: ec, outcome: rec, rate: scen.rates.eco }
+        ];
+
+        items.forEach(item => {
+            if (item.invested > 0) {
+                const isPositive = item.rate > 0;
+                const isNeutral = item.rate === 0;
+                const yieldClass = isNeutral ? 'yield-neutral' : (isPositive ? 'yield-positive' : 'yield-negative');
+                const sign = isNeutral ? '' : (isPositive ? '▲' : '▼');
+
+                const itemHTML = `
+                    <div class="report-item">
+                        <div class="product-info">
+                            <h6>${item.name}</h6>
+                            <span>투자금: ${item.invested.toLocaleString()} 원</span>
+                        </div>
+                        <div class="product-yield">
+                            <span class="yield-badge ${yieldClass}">${sign} ${formatYield(item.rate)}</span>
+                            <div style="font-size: 13px; font-weight:700; margin-top:5px;">
+                                ➡️ ${item.outcome.toLocaleString()} 원
+                            </div>
+                        </div>
+                    </div>
+                `;
+                listContainer.innerHTML += itemHTML;
+            }
+        });
+
+        // If user left unallocated safe cash
+        if (cash > 0) {
+            const cashHTML = `
+                <div class="report-item">
+                    <div class="product-info">
+                        <h6>💵 현금 보관 (미투자 자산)</h6>
+                        <span>보관액: ${cash.toLocaleString()} 원</span>
+                    </div>
+                    <div class="product-yield">
+                        <span class="yield-badge yield-neutral">0% (변화 없음)</span>
+                        <div style="font-size: 13px; font-weight:700; margin-top:5px;">
+                            ➡️ ${cash.toLocaleString()} 원
+                        </div>
+                    </div>
+                </div>
+            `;
+            listContainer.innerHTML += cashHTML;
+        }
+
+        // Handle completely skipped zero-allocation
+        if (s === 0 && et === 0 && te === 0 && ec === 0) {
+            listContainer.innerHTML = `
+                <div style="text-align:center; padding: 20px; color: var(--text-muted); font-size:14px;">
+                    이번 해에는 어디에도 투자하지 않고 현금(100%)으로 소유했습니다! 안전하지만 기회비용은 발생했군요.
+                </div>
+            `;
+        }
+
+        // Apply visual total display
+        document.getElementById('report-total-display').innerText = totalAssets.toLocaleString() + " 원";
+        document.getElementById('report-mentor-advice').innerText = `"${scen.advice}"`;
+
+        // Configure next step CTA button
+        const nextBtn = document.getElementById('btn-next-step');
+        if (currentRound < 5) {
+            nextBtn.innerText = `다음 ${currentRound + 1}라운드로 이동하기 ➡️`;
+        } else {
+            nextBtn.innerText = "최종 투자 결과 확인하기 📊";
+        }
+
+        showScreen('screen-report');
+    }
+
+    // Step navigation between rounds
+    function proceedToNextRound() {
+        if (currentRound < 5) {
+            currentRound++;
+            loadRound();
+            showScreen('screen-game');
+        } else {
+            showFinalResults();
+        }
+    }
+
+    // Display ending feedback and tailored diagnostic analysis
+    function showFinalResults() {
+        const netYieldPercent = ((totalAssets - INITIAL_ASSETS) / INITIAL_ASSETS * 100).toFixed(1);
+        const finalAssetsLabel = document.getElementById('final-assets');
+        const finalYieldLabel = document.getElementById('final-yield');
+        
+        finalAssetsLabel.innerText = totalAssets.toLocaleString() + " 원";
+        
+        if (totalAssets >= INITIAL_ASSETS) {
+            finalYieldLabel.innerText = `+${netYieldPercent}%`;
+            finalYieldLabel.className = "color-accent";
+            document.getElementById('final-icon').innerText = "🏆";
+        } else {
+            finalYieldLabel.innerText = `${netYieldPercent}%`;
+            finalYieldLabel.className = "color-red";
+            document.getElementById('final-icon').innerText = "📉";
+        }
+
+        // Profile investor Diagnostic feedback
+        let archetype = "";
+        let analysis = "";
+
+        if (totalAssets > 16000000) {
+            archetype = "🌟 시장의 지배자! 프로 포트폴리오 거장";
+            analysis = `초기 자본 대비 엄청난 성장률을 달성하셨습니다! 세상 경제의 흐름과 타이밍을 정확히 읽었을 뿐만 아니라 리스크를 적극적으로 기회로 전환한 안목이 완벽합니다. 이미 완벽한 실전형 투자 마인드를 마스터하셨군요!`;
+        } else if (totalAssets > 12000000) {
+            archetype = "🦉 지혜로운 포트폴리오 전략가";
+            analysis = `시장의 불황에도 침착함을 유지하며 자산을 현명하게 지켜냈습니다. 정기예금과 기술주, 친환경 자산들을 기민하게 교차 분산투자하여 최종적으로 훌륭한 흑자 자산을 이루었습니다. 현실 세계에서도 자산을 체계적으로 굴릴 기본 소양이 탄탄합니다.`;
+        } else if (totalAssets >= 10000000) {
+            archetype = "🐢 든든한 원금 사수 거북이 투자자";
+            analysis = `안정 자산과 과감한 시도를 지혜롭게 조율하며 소중한 원금을 끝내 지키고 견실한 이윤을 내셨습니다. 변동성이 두려울 때는 언제나 분산투자 법칙과 안전 예금을 잊지 않는 것이 훗날 큰 금융 위기가 닥쳐와도 생존하는 핵심 비결이랍니다!`;
+        } else {
+            archetype = "🤕 아쉬운 리스크 마니아";
+            analysis = `고위험 기술주의 호재와 악재 타이밍에서 다소 큰 손실을 경험하셨습니다. 투자는 대박을 노리는 베팅이 아니라, 잃지 않는 장기적인 분산 설계라는 점을 이번 실전 체험을 통해 값지게 배우셨으리라 생각합니다. 다시 한 번 전략을 재정비해 볼까요?`;
+        }
+
+        document.getElementById('debriefing-text').innerHTML = `<strong>${archetype}</strong><br><br>${analysis}`;
+        showScreen('screen-final');
+    }
+
+    // Reset loop
+    function resetGame() {
+        showScreen('screen-tutorial');
+    }
+</script>
+
+</body>
+</html>
