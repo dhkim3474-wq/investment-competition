@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ 틴즈 투자 서바이벌 Pro: 고등금융</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Intuitive Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind CSS for Responsive Premium Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f7ff',
+                            100: '#ebf0fe',
+                            500: '#3b82f6', // Toss Blue
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            dark: '#0f172a'
+                        },
+                        accent: {
+                            emerald: '#10b981',
+                            coral: '#f43f5e',
+                            amber: '#f59e0b',
+                            indigo: '#6366f1',
+                            yellowGold: '#eab308'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for log box */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-height-screen font-sans text-slate-800 antialiased flex items-center justify-center p-4 md:p-8">
+
+<div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden min-h-[750px] flex flex-col relative">
+    
+    <!-- Custom Alerts/Toast Box Container -->
+    <div id="toast-container" class="absolute top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4 pointer-events-none transition-all duration-300 transform -translate-y-20 opacity-0">
+        <div class="bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-800">
+            <span id="toast-icon" class="text-xl">⚠️</span>
+            <p id="toast-message" class="text-sm font-medium flex-1"></p>
+        </div>
+    </div>
+
+    <!-- MAIN SCREEN: 1. TUTORIAL (Intro & Rules) -->
+    <div class="screen flex flex-col p-6 md:p-10 active" id="screen-tutorial">
+        <div class="text-center mb-6">
+            <span class="inline-block text-5xl mb-3 animate-bounce">📈</span>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">틴즈 투자 서바이벌 <span class="text-brand-500">PRO</span></h1>
+            <p class="text-slate-500 mt-2 text-sm md:text-base">고등학생을 위한 실전 금리·레버리지·다각화 자산 배분 게임</p>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-brand-500 rounded-r-2xl p-5 mb-6 flex gap-4 items-start">
+            <span class="text-3xl">🧑‍🏫</span>
+            <div>
+                <h4 class="font-bold text-slate-900 text-sm md:text-base">AI 자산관리 멘토의 안내</h4>
+                <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">
+                    "새롭게 개편된 금융 전장에 오신 것을 환영합니다! 이제 대출 시스템(레버리지)뿐만 아니라 **금리 인상에 영향을 받는 리츠(부동산)**와 **스태그플레이션 방어의 핵심인 실물 금(Gold)**을 포트폴리오에 담을 수 있습니다. 거시경제 시나리오의 흐름을 읽고 분산투자의 정수를 발휘해 보세요!"
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-2 text-sm md:text-base">
+                    <i class="fa-solid fa-scale-balanced text-brand-500"></i> 핵심 금융 메커니즘
+                </h3>
+                <ul class="text-xs md:text-sm text-slate-600 space-y-2.5 leading-relaxed">
+                    <li>⚖️ <strong>신용대출(레버리지):</strong> 최대 500만 원까지 대출 가능. 이자는 라운드별로 청구되며, 고금리 국면(빅스텝) 진입 시 이자율이 폭등하여 뼈아픈 이자 폭탄을 안겨줍니다.</li>
+                    <li>🔍 <strong>분석 리포트 구독:</strong> 50만 원의 정보 비용을 지불하고 고급 분석 보고서를 열람해 다음 라운드 상품별 상세 예측 결과를 확인할 수 있습니다.</li>
+                    <li>💸 <strong>인플레이션 & 수수료 페널티:</strong> 현금으로만 방치된 자금은 매년 2%씩 화폐가치가 잠식됩니다. 또한 주식/가상자산/금 등은 거래 시 현실적인 수수료가 차감됩니다.</li>
+                </ul>
+            </div>
+            
+            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-2 text-sm md:text-base">
+                    <i class="fa-solid fa-coins text-accent-amber"></i> 확장된 6대 투자 포트폴리오
+                </h3>
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 text-[11px] text-slate-600">
+                    <div class="p-2 bg-white rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">🏦 정기 예금</strong>
+                        원금 보장, 변동금리 적용. (금리 인상기에 최고의 이자 수익율)
+                    </div>
+                    <div class="p-2 bg-white rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">📊 코스피 ETF</strong>
+                        대형주 분산 지수 추종 펀드. 시장 평균 성장률을 무난히 반영
+                    </div>
+                    <div class="p-2 bg-white rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">🏢 글로벌 리츠</strong>
+                        대출 기반 부동산 펀드. 저금리 상승장에 유리, 고금리에 극취약
+                    </div>
+                    <div class="p-2 bg-white rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">⚡ 첨단 기술주</strong>
+                        AI 혁명 주도 기술 성장주. 유동성과 경제 트렌드에 극도로 민감
+                    </div>
+                    <div class="p-2 bg-white rounded-xl border border-slate-100">
+                        <strong class="text-indigo-900 block mb-1">👑 안전자산 금</strong>
+                        전통 실물 금 투자. 스태그플레이션 및 원자재 쇼크의 최강 방어주
+                    </div>
+                    <div class="p-2 bg-white rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">🪙 가상자산</strong>
+                        초고위험·초고수익 자산. 무제한 거품 광풍과 패닉 셀링의 중심
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="startGame()" class="mt-auto py-4 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-2xl transition duration-200 shadow-lg shadow-brand-500/30 text-lg">
+            도전 시작하기 (가상자본 1,000만 원 지급) 🚀
+        </button>
+    </div>
+
+    <!-- MAIN SCREEN: 2. GAME PLAY DASHBOARD -->
+    <div class="screen flex-col p-4 md:p-8 hidden" id="screen-game">
+        <!-- Top Status Bar -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-4 mb-5">
+            <div class="flex items-center gap-3">
+                <span class="px-4 py-1.5 bg-slate-900 text-white text-xs md:text-sm font-bold rounded-full" id="round-display">Year 1 / 5</span>
+                <span class="text-xs font-semibold text-slate-500 flex items-center gap-1" title="대출 가능 최고 한도">
+                    <i class="fa-solid fa-circle-info"></i> 대출 한도: 500만 원
+                </span>
+            </div>
+            
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+                <div class="text-right">
+                    <span class="text-[10px] md:text-xs text-slate-400 block uppercase font-bold tracking-wider">나의 순자산 (Net Worth)</span>
+                    <strong class="text-xl md:text-2xl font-extrabold text-brand-600" id="assets-display">10,000,000 원</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Columns (Scenario News & Leverage Center) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+            <!-- News Flash Box -->
+            <div class="lg:col-span-2 bg-amber-50 border border-amber-200/60 rounded-2xl p-4 md:p-5 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="px-2 py-0.5 bg-accent-amber text-white text-[10px] font-bold rounded">경제 특종</span>
+                        <span class="text-xs text-slate-500 flex items-center gap-1">
+                            <i class="fa-solid fa-percent"></i> 시장 기본금리: <span id="market-rate-badge" class="font-bold text-slate-700">3.0%</span>
+                        </span>
+                    </div>
+                    <h4 class="font-extrabold text-slate-800 text-sm md:text-base mb-1" id="news-headline">글로벌 거시경제 뉴스가 발표됩니다.</h4>
+                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed" id="news-text">로딩 중...</p>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-amber-200/50 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2">
+                    <div class="text-xs text-slate-500">
+                        💡 고급 리포트 구독 시 상세 예상 수치 공개 (비용: 50만 원)
+                    </div>
+                    <button onclick="buyPremiumReport()" id="btn-premium" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 shrink-0">
+                        <i class="fa-solid fa-crown text-accent-amber"></i> 리포트 구독하기
+                    </button>
+                </div>
+            </div>
+
+            <!-- Leverage / Debt Management Center -->
+            <div class="bg-slate-900 text-white rounded-2xl p-4 md:p-5 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-extrabold text-xs md:text-sm text-slate-300 flex items-center gap-1">
+                            <i class="fa-solid fa-building-columns text-brand-500"></i> 레버리지 금융 센터
+                        </h4>
+                        <span class="px-2 py-0.5 bg-rose-500/20 text-rose-300 text-[10px] font-bold rounded" id="debt-rate-badge">대출이자 연 6.0%</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 my-2">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">현재 대출 원금</span>
+                            <strong class="text-base md:text-lg font-extrabold text-slate-100" id="debt-display">0 원</strong>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">사용 가능 현금</span>
+                            <strong class="text-base md:text-lg font-extrabold text-accent-emerald" id="cash-display">10,000,000 원</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 space-y-2">
+                    <div class="flex gap-2">
+                        <button onclick="handleLoan(1000000)" class="flex-1 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl transition border border-slate-700">
+                            +100만 대출
+                        </button>
+                        <button onclick="handleLoan(5000000)" class="flex-1 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl transition border border-slate-700">
+                            최대 한도 대출
+                        </button>
+                    </div>
+                    <button onclick="repayAllLoan()" class="w-full py-2 bg-rose-600 hover:bg-rose-500 text-xs font-bold rounded-xl transition">
+                        대출 전액 상환 (빚 갚기)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Allocation Tracker Progress Bar (6 Asset Segments) -->
+        <div class="bg-slate-100 h-3 w-full rounded-full overflow-hidden flex mb-5" id="portfolio-ratio-bar">
+            <!-- Dynamic visual segment rendering -->
+        </div>
+
+        <!-- Investment Inputs Dashboard (6 Assets Grid layout) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            <!-- Asset 1: Savings -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:border-brand-500 transition duration-200">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">🏦 정기 예금 <span class="text-[11px] font-semibold text-slate-400 ml-1">원금 보장</span></h5>
+                        <p class="text-[11px] text-slate-500 mt-0.5">안전 가치의 기본. 거래 수수료 없음.</p>
+                    </div>
+                    <span class="px-2 py-0.5 bg-emerald-50 text-accent-emerald text-[10px] font-bold rounded" id="saving-forecast-badge">이자 연 3.0%</span>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-3">
+                    <div class="relative flex-1">
+                        <input type="number" id="input-saving" min="0" placeholder="0" class="w-full pl-2 pr-7 py-1.5 border border-slate-300 rounded-xl font-bold text-right text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" oninput="calculateRemains()">
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">원</span>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <button onclick="addMoney('saving', 1000000)" class="px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded-lg text-slate-600 transition">+100만</button>
+                        <button onclick="maxMoney('saving')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-white rounded-lg transition">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset 2: Index ETF -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:border-brand-500 transition duration-200">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">📊 코스피 ETF <span class="text-[11px] font-semibold text-slate-400 ml-1">수수료 0.1%</span></h5>
+                        <p class="text-[11px] text-slate-500 mt-0.5">국내 우량주 분산 지수 추종 펀드 상품.</p>
+                    </div>
+                    <span class="px-2 py-0.5 bg-blue-50 text-brand-500 text-[10px] font-bold rounded" id="etf-forecast-badge">변동 예측중</span>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-3">
+                    <div class="relative flex-1">
+                        <input type="number" id="input-etf" min="0" placeholder="0" class="w-full pl-2 pr-7 py-1.5 border border-slate-300 rounded-xl font-bold text-right text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" oninput="calculateRemains()">
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">원</span>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <button onclick="addMoney('etf', 1000000)" class="px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded-lg text-slate-600 transition">+100만</button>
+                        <button onclick="maxMoney('etf')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-white rounded-lg transition">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset 3: Global REITs -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:border-brand-500 transition duration-200">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">🏢 글로벌 리츠 <span class="text-[11px] font-semibold text-indigo-400 ml-1">수수료 0.15%</span></h5>
+                        <p class="text-[11px] text-slate-500 mt-0.5">부동산 실물 소유권 분할 펀드. 배당 매력적.</p>
+                    </div>
+                    <span class="px-2 py-0.5 bg-indigo-50 text-accent-indigo text-[10px] font-bold rounded" id="reits-forecast-badge">변동 예측중</span>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-3">
+                    <div class="relative flex-1">
+                        <input type="number" id="input-reits" min="0" placeholder="0" class="w-full pl-2 pr-7 py-1.5 border border-slate-300 rounded-xl font-bold text-right text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" oninput="calculateRemains()">
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">원</span>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <button onclick="addMoney('reits', 1000000)" class="px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded-lg text-slate-600 transition">+100만</button>
+                        <button onclick="maxMoney('reits')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-white rounded-lg transition">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset 4: Tech Stocks -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:border-brand-500 transition duration-200">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">⚡ 첨단 기술주 <span class="text-[11px] font-semibold text-slate-400 ml-1">수수료 0.3%</span></h5>
+                        <p class="text-[11px] text-slate-500 mt-0.5">AI 및 테크 신산업 주도 성장주 집중 배팅.</p>
+                    </div>
+                    <span class="px-2 py-0.5 bg-rose-50 text-accent-coral text-[10px] font-bold rounded" id="tech-forecast-badge">변동 예측중</span>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-3">
+                    <div class="relative flex-1">
+                        <input type="number" id="input-tech" min="0" placeholder="0" class="w-full pl-2 pr-7 py-1.5 border border-slate-300 rounded-xl font-bold text-right text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" oninput="calculateRemains()">
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">원</span>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <button onclick="addMoney('tech', 1000000)" class="px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded-lg text-slate-600 transition">+100만</button>
+                        <button onclick="maxMoney('tech')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-white rounded-lg transition">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset 5: Gold -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:border-brand-500 transition duration-200">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">👑 안전자산 금 <span class="text-[11px] font-semibold text-yellow-600 ml-1">수수료 0.2%</span></h5>
+                        <p class="text-[11px] text-slate-500 mt-0.5">최고의 실물 헤지 안전 자산. 스태그플레이션 특화.</p>
+                    </div>
+                    <span class="px-2 py-0.5 bg-yellow-50 text-accent-yellowGold text-[10px] font-bold rounded" id="gold-forecast-badge">변동 예측중</span>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-3">
+                    <div class="relative flex-1">
+                        <input type="number" id="input-gold" min="0" placeholder="0" class="w-full pl-2 pr-7 py-1.5 border border-slate-300 rounded-xl font-bold text-right text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" oninput="calculateRemains()">
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">원</span>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <button onclick="addMoney('gold', 1000000)" class="px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded-lg text-slate-600 transition">+100만</button>
+                        <button onclick="maxMoney('gold')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-white rounded-lg transition">최대</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset 6: Crypto Speculation -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:border-brand-500 transition duration-200">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">🪙 가상자산 (Crypto) <span class="text-[11px] font-semibold text-slate-400 ml-1">수수료 0.5%</span></h5>
+                        <p class="text-[11px] text-slate-500 mt-0.5">초고위험 투기형 암호자산. 극도의 폭락/폭등 가능성.</p>
+                    </div>
+                    <span class="px-2 py-0.5 bg-amber-50 text-accent-amber text-[10px] font-bold rounded" id="crypto-forecast-badge">변동 예측중</span>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-3">
+                    <div class="relative flex-1">
+                        <input type="number" id="input-crypto" min="0" placeholder="0" class="w-full pl-2 pr-7 py-1.5 border border-slate-300 rounded-xl font-bold text-right text-xs focus:outline-none focus:ring-2 focus:ring-brand-500" oninput="calculateRemains()">
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">원</span>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <button onclick="addMoney('crypto', 1000000)" class="px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded-lg text-slate-600 transition">+100만</button>
+                        <button onclick="maxMoney('crypto')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-white rounded-lg transition">최대</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remaining Cash Display and CTA button -->
+        <div class="mt-auto flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-slate-100 p-4 rounded-2xl">
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-bold text-slate-500">배분 가능 총자본:</span>
+                <strong class="text-lg font-extrabold text-slate-800" id="remains-display">10,000,000 원</strong>
+            </div>
+            <button onclick="confirmInvestment()" class="py-3 px-8 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg transition duration-200">
+                올해 포트폴리오 확정하기 📈
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN SCREEN: 3. REPORT SCREEN -->
+    <div class="screen flex-col p-4 md:p-8 hidden" id="screen-report">
+        <div class="border-b border-slate-100 pb-4 mb-5">
+            <h3 class="text-2xl font-extrabold text-slate-900 text-center flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-invoice-dollar text-brand-500"></i> 연간 자산 정산 분석 리포트
+            </h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <!-- Results breakdown cards -->
+            <div class="lg:col-span-2 space-y-3 custom-scrollbar overflow-y-auto max-h-[360px] pr-2" id="report-items-container">
+                <!-- Dynamically populated report items -->
+            </div>
+
+            <!-- Side Total Calculation Board -->
+            <div class="bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-slate-400 font-bold text-xs uppercase tracking-wider mb-4">금융 정산 최종 합계</h4>
+                    
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">투자 평가 총액</span>
+                            <span id="rep-invested-outcome" class="font-bold">0 원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">유지 현금액</span>
+                            <span id="rep-cash" class="font-bold">0 원</span>
+                        </div>
+                        <div class="flex justify-between text-rose-300">
+                            <span>원리금(대출이자 포함)</span>
+                            <span id="rep-debt-total" class="font-bold">0 원</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-400 border-t border-slate-800 pt-2">
+                            <span>인플레이션 누적 손실</span>
+                            <span id="rep-inflation-loss">0 원</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-800 pt-4 mt-4">
+                    <span class="text-xs text-slate-400 block mb-1">최종 회수 순자산 (Net Asset)</span>
+                    <strong class="text-xl md:text-2xl font-extrabold text-brand-500" id="report-total-display">0 원</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advice Section -->
+        <div class="bg-blue-50 border-l-4 border-brand-500 rounded-r-2xl p-4 mb-6 flex gap-3 items-start">
+            <span class="text-2xl">💡</span>
+            <div>
+                <h5 class="font-bold text-slate-900 text-sm">AI 애널리스트 피드백</h5>
+                <p id="report-mentor-advice" class="text-xs text-slate-600 mt-0.5 leading-relaxed">-</p>
+            </div>
+        </div>
+
+        <button id="btn-next-step" onclick="proceedToNextRound()" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition duration-200 text-base md:text-lg">
+            다음 해(라운드) 진행하기 ➡️
+        </button>
+    </div>
+
+    <!-- MAIN SCREEN: 4. FINAL RESULTS & EVALUATION -->
+    <div class="screen flex-col p-6 md:p-10 hidden" id="screen-final">
+        <div class="text-center mb-6">
+            <span class="text-6xl mb-3 inline-block" id="final-icon">🏆</span>
+            <h2 class="text-3xl font-extrabold text-slate-900" id="final-grade-title">모의투자 완료!</h2>
+            <p class="text-slate-500 mt-1 text-sm md:text-base">5개년의 거시경제 시뮬레이션을 마쳤습니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center flex flex-col justify-center">
+                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">최종 순자산 잔고</span>
+                <strong class="text-3xl font-black text-brand-600 my-1" id="final-assets">0 원</strong>
+                <span class="text-xs text-slate-500">누적 수익률: <strong id="final-yield" class="text-brand-500">+0.0%</strong></span>
+            </div>
+
+            <div class="bg-slate-900 text-white border border-slate-800 rounded-2xl p-5">
+                <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                    <i class="fa-solid fa-graduation-cap text-brand-500"></i> AI 금융 사관학교 최종 자격 진단
+                </h4>
+                <p class="text-xs md:text-sm text-slate-300 leading-relaxed" id="debriefing-text">-</p>
+            </div>
+        </div>
+
+        <!-- High School Key Takeaway Section -->
+        <div class="border border-slate-200 rounded-2xl p-4 md:p-5 bg-slate-50 mb-6">
+            <h5 class="font-bold text-slate-900 text-sm md:text-base mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb text-accent-amber"></i> 고등학생을 위한 교과 연계 금융 상식
+            </h5>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-600 leading-relaxed">
+                <div>
+                    <h6 class="font-bold text-slate-800 mb-1">🔗 통화 정책과 레버리지의 양면성</h6>
+                    <p>중앙은행이 금리를 낮출 때는 빚(부채)이 영리한 지렛대 역할을 할 수 있지만, 금리가 가파르게 인상되는 시기(예: 자이언트 스텝)에는 빚더미의 이자가 무한 증폭되어 원금이 몽땅 타버립니다.</p>
+                </div>
+                <div>
+                    <h6 class="font-bold text-slate-800 mb-1">💸 화폐 가치의 적, 인플레이션</h6>
+                    <p>투자를 아예 안 하고 '100% 현금 보관'만 하는 행위는 절대 완벽히 안전하지 않습니다. 매년 물가상승률(2%)만큼 나의 보이지 않는 진짜 화폐 실질 가치는 계속해서 갉아 먹히게 됩니다.</p>
+                </div>
+                <div>
+                    <h6 class="font-bold text-slate-800 mb-1">📊 투기성 높은 투자의 덫 (수수료)</h6>
+                    <p>잦은 가상자산이나 주식의 단타 거래는 소소해 보이지만 막대한 거래 수수료와 거래세를 유발하여 수익의 상당 부분을 증발시키는 심각한 거래 비용을 지불해야 함을 의미합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="resetGame()" class="py-4 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-2xl transition duration-200 shadow-lg text-base md:text-lg">
+            금융전략 가다듬고 다시 도전하기 🔄
+        </button>
+    </div>
+
+</div>
+
+<script>
+    // System & User State
+    let currentRound = 1;
+    let netAssets = 10000000;  // 순자산
+    let currentCash = 10000000; // 가용현금
+    let currentDebt = 0;       // 신용 대출 원금
+    const INITIAL_ASSETS = 10000000;
+    
+    // Macro Variables
+    let baseMarketRate = 3.0; // 시장 기본 금리 %
+    let debtInterestRate = 0.06; // 대출 이자율 (라운드당)
+    let isPremiumReportSubscribed = false;
+
+    // Fixed High School Investment Simulation Scenarios (Expanded to 6 Assets)
+    const scenarios = [
+        { 
+            round: 1, 
+            headline: '초저금리 활황 장세와 과잉 유동성',
+            news: '전 세계 코로나 팬데믹 복구를 위해 중앙은행들이 일제히 기준금리를 인하하고 막대한 자금을 풀었습니다. 대출 금리가 역사적 최저 수준(신용대출 5%)에 달하며, 시중에 엄청난 돈이 돌고 있습니다.', 
+            marketRate: 1.5,
+            debtRate: 0.05,
+            rates: { saving: 0.015, etf: 0.12, reits: 0.16, tech: 0.28, gold: -0.04, crypto: 0.95 },
+            advice: '금리가 극단적으로 낮고 유동성이 풀릴 때는 화폐 가치가 하락하며, 위험 자산(기술주, 가상자산)과 대출을 적극 활용한 실물부동산 자산(리츠)의 거품이 매우 빠르게 커집니다. 반면, 안전자산인 금은 저평가되는 경향을 보입니다.',
+            premiumReport: '이번 라운드는 엄청난 유동성 랠리입니다! 저위험 정기 예금은 거의 이자가 없습니다(1.5%). 반면 가상자산은 최대 [+80% ~ +120%], 기술주는 [+20% ~ +35%], 대출 기반 부동산인 리츠도 [+13% ~ +18%] 범위의 강력한 폭등이 예상됩니다. 금은 돈이 유동자산으로 쏠리며 소폭 하락[-3% ~ -6%]이 전망됩니다.'
+        },
+        { 
+            round: 2, 
+            headline: '스태그플레이션 위기 및 원자재 쇼크',
+            news: '급격히 늘어난 유동성 부작용에 원자재 병목현상과 전쟁까지 겹치며 물가가 40년 만에 최고 수준으로 솟구쳤습니다. 인플레이션 쇼크 소식에 자본 시장 전반이 크게 위축되기 시작합니다.', 
+            marketRate: 3.5,
+            debtRate: 0.08,
+            rates: { saving: 0.035, etf: -0.15, reits: -0.11, tech: -0.32, gold: 0.28, crypto: -0.72 },
+            advice: '스태그플레이션 상황에서는 미래 가치를 선반영하는 기술주나 무원천 투기 자산인 암호화폐가 처참하게 붕괴합니다. 이때는 위험을 회피하고자 전 세계의 뭉칫돈이 실물 안전자산인 "금"으로 피난가므로, 금을 대량 매수했다면 최고의 성과를 거둘 수 있었습니다.',
+            premiumReport: '비상이 걸렸습니다! 인플레이션을 방어하기 위해 자산가들이 일제히 위험자산에서 철수하고 있습니다. 코스피 ETF도 하락하고 리츠도 조정을 받는 한편 가상자산은 [-65% ~ -80%] 수준의 기록적 폭락세가 예상됩니다. 다만, 실물 안전자산인 금은 독보적인 급등 [+24% ~ +32%]이 감지됩니다.'
+        },
+        { 
+            round: 3, 
+            headline: '빅스텝 단행! 혹한의 고금리 시대',
+            news: '미국 연준을 비롯한 중앙은행들이 폭주하는 물가를 잡기 위해 이례적으로 금리를 한 번에 0.75%p씩 인상하는 "자이언트 스텝"을 연속 단행했습니다. 고금리 충격이 전 대출 시장을 덮칩니다.', 
+            marketRate: 6.5,
+            debtRate: 0.12,
+            rates: { saving: 0.07, etf: -0.05, reits: -0.18, tech: -0.15, gold: -0.02, crypto: -0.10 },
+            advice: '금리가 6~7%를 넘어가면 안전한 정기예금의 매력도가 매우 치솟습니다. 특히 이 시기에는 대출을 대량 동반해 투자하는 리츠(부동산 펀드)가 이자 비용 상환 압박으로 큰 손실(-18%)을 보게 되며, 고율의 대출이자(12%)를 조기 상환하지 않았다면 심대한 이자 페널티를 입게 됩니다.',
+            premiumReport: '고금리의 위기이자 최고의 예금 기회입니다. 정기 예금 이자는 연 [7%]까지 치솟아 예금을 꽉 채우는 게 최고로 현명합니다. 리츠 부동산은 이자 급증 여파로 [-15% ~ -20%] 수준의 무서운 급락이 우려되며, 금리 기회비용 상승으로 금 또한 약간의 조정이 예상됩니다.'
+        },
+        { 
+            round: 4, 
+            headline: 'AI 혁신 상용화 및 실적주의 등장',
+            news: '단순한 테마성 거품을 넘어 전 지구적 대기업들의 실무 업무를 직접 자동화하는 인공지능(AI) 솔루션들의 대규모 매출이 재무제표에 잡히기 시작했습니다. 기술 혁신 랠리가 되살아납니다.', 
+            marketRate: 4.0,
+            debtRate: 0.07,
+            rates: { saving: 0.04, etf: 0.10, reits: 0.08, tech: 0.45, gold: 0.01, crypto: 0.15 },
+            advice: '단순 거품이 걷힌 후 실제 이윤을 창출하는 기업 위주로 재편되는 옥석 가리기가 끝났습니다. 첨단 기술주가 상용화 이익 수치에 힘입어 무려 +45% 대도약하였습니다. 리츠와 ETF도 완만한 성장을 보이며 경기가 연착륙했습니다.',
+            premiumReport: '확실한 실적 장세가 도래했습니다! 빅테크 실적 호조가 주도하며 첨단 기술주가 [+38% ~ +52%] 범위의 초강세 성장을 달성할 것으로 보입니다. 리츠 부동산과 가상자산도 동반 온기를 입어 각각 [+6% ~ +10%], [+10% ~ +18%] 수준의 양호한 우상향이 기대됩니다.'
+        },
+        { 
+            round: 5, 
+            headline: '탄소제로 기후 협약의 본격적인 법제화',
+            news: '마지막 라운드에서는 탄소 배출 기준을 준수하지 않는 국가의 수입품에 고액의 탄소 국경세를 매기는 강력한 기후 규제안이 글로벌 통과되었습니다. 에너지 혁신 시장에 거대 자금이 흘러 들어옵니다.', 
+            marketRate: 3.0,
+            debtRate: 0.06,
+            rates: { saving: 0.03, etf: 0.08, reits: 0.07, tech: 0.10, gold: 0.04, crypto: -0.30 },
+            advice: '규제와 장기 정책 트렌드는 강력한 정량적 투자 지표가 됩니다. 친환경 규제가 법제화되면서 국경세 부담 우려로 가상자산 채굴 시장은 폭락(-30%)한 반면, 친환경 섹터 비중이 높은 ETF와 친환경 인증 빌딩 위주 리츠 자산들은 우량한 결실을 보았습니다.',
+            premiumReport: '파이널 라운드 정책 수혜가 시장을 갈라놓습니다. 대기업 친환경 공정 전환 기대에 코스피 ETF는 [+6% ~ +10%] 상승이 확실시되며, 가상자산은 막대한 전력 소모에 따른 규제 폭탄으로 [-25% ~ -35%] 가량 큰 조정을 겪을 신호가 분석됩니다.'
+        }
+    ];
+
+    // Helper functions for custom UI toasts
+    function showToast(message, icon = '⚠️') {
+        const toast = document.getElementById('toast-container');
+        document.getElementById('toast-message').innerText = message;
+        document.getElementById('toast-icon').innerText = icon;
+        
+        toast.classList.remove('opacity-0', '-translate-y-20', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        
+        setTimeout(() => {
+            toast.classList.remove('opacity-100', 'translate-y-0');
+            toast.classList.add('opacity-0', '-translate-y-20', 'pointer-events-none');
+        }, 3200);
+    }
+
+    // Screen Transition Engine
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(scr => {
+            scr.classList.add('hidden');
+            scr.classList.remove('flex');
+        });
+        const target = document.getElementById(screenId);
+        target.classList.remove('hidden');
+        target.classList.add('flex');
+    }
+
+    // Initialize/Reset game loop
+    function startGame() {
+        currentRound = 1;
+        netAssets = INITIAL_ASSETS;
+        currentCash = INITIAL_ASSETS;
+        currentDebt = 0;
+        isPremiumReportSubscribed = false;
+        
+        loadRound();
+        showScreen('screen-game');
+    }
+
+    // Load Round Elements
+    function loadRound() {
+        const scenario = scenarios[currentRound - 1];
+        
+        // Reset inputs
+        document.getElementById('input-saving').value = "";
+        document.getElementById('input-etf').value = "";
+        document.getElementById('input-reits').value = "";
+        document.getElementById('input-tech').value = "";
+        document.getElementById('input-gold').value = "";
+        document.getElementById('input-crypto').value = "";
+        
+        // State indicators
+        baseMarketRate = scenario.marketRate;
+        debtInterestRate = scenario.debtRate;
+        isPremiumReportSubscribed = false;
+
+        // Visual configurations
+        document.getElementById('round-display').innerText = `Year ${currentRound} / 5`;
+        document.getElementById('news-headline').innerText = scenario.headline;
+        document.getElementById('news-text').innerText = scenario.news;
+        document.getElementById('market-rate-badge').innerText = baseMarketRate.toFixed(1) + "%";
+        document.getElementById('debt-rate-badge').innerText = `대출이자 연 ${(debtInterestRate * 100).toFixed(1)}%`;
+        
+        // Premium Reset
+        const pBtn = document.getElementById('btn-premium');
+        pBtn.disabled = false;
+        pBtn.innerHTML = `<i class="fa-solid fa-crown text-accent-amber"></i> 리포트 구독하기`;
+        pBtn.className = "px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 shrink-0";
+
+        // Forecast display reset
+        document.getElementById('saving-forecast-badge').innerText = `이자 연 ${(baseMarketRate).toFixed(1)}%`;
+        document.getElementById('saving-forecast-badge').className = "px-2 py-0.5 bg-emerald-50 text-accent-emerald text-[10px] font-bold rounded";
+        
+        document.getElementById('etf-forecast-badge').innerText = `변동 예측중`;
+        document.getElementById('etf-forecast-badge').className = "px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded";
+        document.getElementById('reits-forecast-badge').innerText = `변동 예측중`;
+        document.getElementById('reits-forecast-badge').className = "px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded";
+        document.getElementById('tech-forecast-badge').innerText = `변동 예측중`;
+        document.getElementById('tech-forecast-badge').className = "px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded";
+        document.getElementById('gold-forecast-badge').innerText = `변동 예측중`;
+        document.getElementById('gold-forecast-badge').className = "px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded";
+        document.getElementById('crypto-forecast-badge').innerText = `변동 예측중`;
+        document.getElementById('crypto-forecast-badge').className = "px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded";
+
+        updateDashboard();
+    }
+
+    // Dynamic asset dashboard metrics updater
+    function updateDashboard() {
+        document.getElementById('assets-display').innerText = netAssets.toLocaleString() + " 원";
+        document.getElementById('debt-display').innerText = currentDebt.toLocaleString() + " 원";
+        document.getElementById('cash-display').innerText = currentCash.toLocaleString() + " 원";
+        
+        calculateRemains();
+    }
+
+    // Loan processing center
+    function handleLoan(amount) {
+        let maxAllowedLoan = 5000000;
+        let newDesiredDebt = currentDebt + amount;
+
+        if (amount > 1000000) {
+            newDesiredDebt = maxAllowedLoan;
+        }
+
+        if (newDesiredDebt > maxAllowedLoan) {
+            showToast("신용대출 한도 초과! 최대 500만 원까지만 차입할 수 있습니다.", "🚨");
+            return;
+        }
+
+        const addedLoan = newDesiredDebt - currentDebt;
+        if (addedLoan <= 0) return;
+
+        currentDebt = newDesiredDebt;
+        currentCash += addedLoan;
+        netAssets = currentCash - currentDebt; 
+
+        showToast(`${addedLoan.toLocaleString()} 원 대출을 실행했습니다. (이자율 유의)`, "🏦");
+        updateDashboard();
+    }
+
+    // Loan Instant Repayment
+    function repayAllLoan() {
+        if (currentDebt === 0) {
+            showToast("상환할 대출 잔액이 존재하지 않습니다.", "ℹ️");
+            return;
+        }
+
+        if (currentCash >= currentDebt) {
+            currentCash -= currentDebt;
+            showToast(`대출 원금 ${currentDebt.toLocaleString()} 원을 전액 상환하였습니다!`, "✅");
+            currentDebt = 0;
+        } else {
+            const partialRepay = currentCash;
+            currentDebt -= partialRepay;
+            currentCash = 0;
+            showToast(`현금이 부족해 가능한 자금 ${partialRepay.toLocaleString()} 원을 우선 부분 상환했습니다.`, "⚠️");
+        }
+        netAssets = currentCash - currentDebt;
+        updateDashboard();
+    }
+
+    // PREMIUM ECONOMY REVIEWS
+    function buyPremiumReport() {
+        if (isPremiumReportSubscribed) return;
+        
+        let reportCost = 500000;
+        if (currentCash < reportCost) {
+            showToast("자금이 부족해 분석 보고서를 구독할 수 없습니다. (현금 50만 원 필수)", "❌");
+            return;
+        }
+
+        currentCash -= reportCost;
+        netAssets -= reportCost;
+        isPremiumReportSubscribed = true;
+
+        showToast("고급 경제 리포트 분석 해제가 완료되었습니다!", "✨");
+        
+        const scenario = scenarios[currentRound - 1];
+        document.getElementById('news-text').innerHTML = `💡 <strong>[전문가 예측 보고서 수신 완료]</strong><br>${scenario.premiumReport}`;
+        
+        const pBtn = document.getElementById('btn-premium');
+        pBtn.disabled = true;
+        pBtn.innerText = "구독 완료";
+        pBtn.className = "px-4 py-2 bg-slate-400 text-slate-100 font-bold text-xs rounded-xl cursor-default shrink-0";
+
+        // Update forecast badges
+        const sRates = scenario.rates;
+        document.getElementById('etf-forecast-badge').innerText = `예상: ${formatYield(sRates.etf)}`;
+        document.getElementById('etf-forecast-badge').className = "px-2 py-0.5 bg-blue-50 text-brand-500 text-[10px] font-bold rounded animate-pulse";
+        
+        document.getElementById('reits-forecast-badge').innerText = `예상: ${formatYield(sRates.reits)}`;
+        document.getElementById('reits-forecast-badge').className = "px-2 py-0.5 bg-indigo-50 text-accent-indigo text-[10px] font-bold rounded animate-pulse";
+        
+        document.getElementById('tech-forecast-badge').innerText = `예상: ${formatYield(sRates.tech)}`;
+        document.getElementById('tech-forecast-badge').className = "px-2 py-0.5 bg-rose-50 text-accent-coral text-[10px] font-bold rounded animate-pulse";
+        
+        document.getElementById('gold-forecast-badge').innerText = `예상: ${formatYield(sRates.gold)}`;
+        document.getElementById('gold-forecast-badge').className = "px-2 py-0.5 bg-yellow-50 text-accent-yellowGold text-[10px] font-bold rounded animate-pulse";
+        
+        document.getElementById('crypto-forecast-badge').innerText = `예상: ${formatYield(sRates.crypto)}`;
+        document.getElementById('crypto-forecast-badge').className = "px-2 py-0.5 bg-amber-50 text-accent-amber text-[10px] font-bold rounded animate-pulse";
+
+        updateDashboard();
+    }
+
+    // Dynamic allocation tracker calculations
+    function calculateRemains() {
+        const saving = parseInt(document.getElementById('input-saving').value) || 0;
+        const etf = parseInt(document.getElementById('input-etf').value) || 0;
+        const reits = parseInt(document.getElementById('input-reits').value) || 0;
+        const tech = parseInt(document.getElementById('input-tech').value) || 0;
+        const gold = parseInt(document.getElementById('input-gold').value) || 0;
+        const crypto = parseInt(document.getElementById('input-crypto').value) || 0;
+
+        const totalPortfolio = saving + etf + reits + tech + gold + crypto;
+        const remains = currentCash - totalPortfolio;
+
+        const remainsDisplay = document.getElementById('remains-display');
+        remainsDisplay.innerText = remains.toLocaleString() + " 원";
+
+        if (remains < 0) {
+            remainsDisplay.style.color = "#f43f5e"; 
+        } else {
+            remainsDisplay.style.color = "#0f172a";
+        }
+
+        // Render reactive visual ratio progress bar segments (now 6 assets)
+        renderRatioBar(saving, etf, reits, tech, gold, crypto, remains);
+
+        return { saving, etf, reits, tech, gold, crypto, remains, totalPortfolio };
+    }
+
+    // Visual portfolio ratio bar component maker (6 Assets + Remaining Cash)
+    function renderRatioBar(sv, et, rt, tc, gd, cr, rm) {
+        const bar = document.getElementById('portfolio-ratio-bar');
+        bar.innerHTML = ''; 
+
+        const totalDenominator = currentCash > 0 ? currentCash : 1;
+        const pSv = (sv / totalDenominator * 100);
+        const pEt = (et / totalDenominator * 100);
+        const pRt = (rt / totalDenominator * 100);
+        const pTc = (tc / totalDenominator * 100);
+        const pGd = (gd / totalDenominator * 100);
+        const pCr = (cr / totalDenominator * 100);
+        const pRm = (rm > 0 ? rm : 0) / totalDenominator * 100;
+
+        if (pSv > 0) bar.innerHTML += `<div style="width: ${pSv}%" class="bg-emerald-500 h-full" title="예금"></div>`;
+        if (pEt > 0) bar.innerHTML += `<div style="width: ${pEt}%" class="bg-blue-500 h-full" title="ETF"></div>`;
+        if (pRt > 0) bar.innerHTML += `<div style="width: ${pRt}%" class="bg-indigo-500 h-full" title="리츠"></div>`;
+        if (pTc > 0) bar.innerHTML += `<div style="width: ${pTc}%" class="bg-rose-500 h-full" title="기술주"></div>`;
+        if (pGd > 0) bar.innerHTML += `<div style="width: ${pGd}%" class="bg-yellow-500 h-full" title="금"></div>`;
+        if (pCr > 0) bar.innerHTML += `<div style="width: ${pCr}%" class="bg-amber-600 h-full" title="가상자산"></div>`;
+        if (pRm > 0) bar.innerHTML += `<div style="width: ${pRm}%" class="bg-slate-300 h-full" title="현금잔고"></div>`;
+    }
+
+    // Quick Action button handlers
+    function addMoney(target, amount) {
+        const input = document.getElementById(`input-${target}`);
+        const currentVal = parseInt(input.value) || 0;
+        input.value = currentVal + amount;
+        calculateRemains();
+    }
+
+    function maxMoney(target) {
+        const input = document.getElementById(`input-${target}`);
+        const { saving, etf, reits, tech, gold, crypto } = calculateRemains();
+        const inputCurrent = parseInt(input.value) || 0;
+        
+        const remainingLiquidity = currentCash - (saving + etf + reits + tech + gold + crypto - inputCurrent);
+        input.value = remainingLiquidity > 0 ? remainingLiquidity : 0;
+        
+        calculateRemains();
+    }
+
+    // CORE CALCULATION LOOP AT ROUND SETTLEMENT
+    function confirmInvestment() {
+        const { saving, etf, reits, tech, gold, crypto, remains, totalPortfolio } = calculateRemains();
+
+        if (remains < 0) {
+            showToast("배분 자금이 보유 가용 현금을 초과했습니다! 분배 비율을 다시 조절하세요.", "🚨");
+            return;
+        }
+
+        const scenario = scenarios[currentRound - 1];
+
+        // 1. Transaction Commission / Fees Deductions
+        // Tech (0.3%), Crypto (0.5%), ETF (0.1%), Reits (0.15%), Gold (0.2%)
+        const feeEtf = Math.round(etf * 0.001);
+        const feeReits = Math.round(reits * 0.0015);
+        const feeTech = Math.round(tech * 0.003);
+        const feeGold = Math.round(gold * 0.002);
+        const feeCrypto = Math.round(crypto * 0.005);
+        const totalFees = feeEtf + feeReits + feeTech + feeGold + feeCrypto;
+
+        // 2. Performance Growth Yield calculations
+        const resultSaving = Math.round(saving * (1 + scenario.rates.saving));
+        const resultEtf = Math.round((etf - feeEtf) * (1 + scenario.rates.etf));
+        const resultReits = Math.round((reits - feeReits) * (1 + scenario.rates.reits));
+        const resultTech = Math.round((tech - feeTech) * (1 + scenario.rates.tech));
+        const resultGold = Math.round((gold - feeGold) * (1 + scenario.rates.gold));
+        const resultCrypto = Math.round((crypto - feeCrypto) * (1 + scenario.rates.crypto));
+
+        // 3. Uninvested Liquid Cash is eaten by Inflation (Annual rate: 2%)
+        const inflationLoss = Math.round(remains * 0.02);
+        const resultCash = remains - inflationLoss;
+
+        // 4. Debt Interest Deduction
+        const interestCharge = Math.round(currentDebt * debtInterestRate);
+        const totalDebtPaybackObligation = currentDebt + interestCharge;
+
+        // Balance calculations after interest charges
+        const totalGrossInvestedOutcomes = resultSaving + resultEtf + resultReits + resultTech + resultGold + resultCrypto;
+        const totalAssetPoolBeforeRepayingLiquidation = totalGrossInvestedOutcomes + resultCash;
+
+        currentCash = totalAssetPoolBeforeRepayingLiquidation;
+        netAssets = currentCash - currentDebt;
+
+        // Show intermediate performance breakdowns
+        displayIntermediateReport(
+            saving, etf, reits, tech, gold, crypto, remains,
+            resultSaving, resultEtf, resultReits, resultTech, resultGold, resultCrypto, resultCash,
+            totalFees, inflationLoss, interestCharge, totalDebtPaybackObligation, scenario
+        );
+    }
+
+    function formatYield(rate) {
+        const percent = (rate * 100).toFixed(1);
+        return rate > 0 ? `+${percent}%` : `${percent}%`;
+    }
+
+    // Display Interactive Round Performance Report Card
+    function displayIntermediateReport(
+        s, et, rt, te, gd, cr, cash,
+        rs, ret, rrt, rte, rgd, rcr, rcs,
+        fees, infLoss, interest, totalDebt, scen
+    ) {
+        const container = document.getElementById('report-items-container');
+        container.innerHTML = ''; // reset
+
+        const reportData = [
+            { name: "🏦 정기 예금", icon: "fa-building-columns", invested: s, outcome: rs, rate: scen.rates.saving, details: "원금 및 확정 이자 정산 완료. (수수료 면제)" },
+            { name: "📊 코스피 ETF", icon: "fa-chart-line", invested: et, outcome: ret, rate: scen.rates.etf, details: `거래 수수료 ${Math.round(et*0.001).toLocaleString()} 원 차감 완료.` },
+            { name: "🏢 글로벌 리츠", icon: "fa-city", invested: rt, outcome: rrt, rate: scen.rates.reits, details: `거래 수수료 ${Math.round(rt*0.0015).toLocaleString()} 원 차감 완료.` },
+            { name: "⚡ 첨단 기술주", icon: "fa-bolt", invested: te, outcome: rte, rate: scen.rates.tech, details: `수수료/거래세 ${Math.round(te*0.003).toLocaleString()} 원 차감 완료.` },
+            { name: "👑 안전자산 금", icon: "fa-gem", invested: gd, outcome: rgd, rate: scen.rates.gold, details: `수수료 ${Math.round(gd*0.002).toLocaleString()} 원 차감 완료.` },
+            { name: "🪙 가상자산", icon: "fa-coins", invested: cr, outcome: rcr, rate: scen.rates.crypto, details: `거래 수수료 ${Math.round(cr*0.005).toLocaleString()} 원 차감 완료.` }
+        ];
+
+        reportData.forEach(item => {
+            if (item.invested > 0) {
+                const isPositive = item.rate > 0;
+                const isNeutral = item.rate === 0;
+                const yieldClass = isNeutral ? 'text-slate-500 bg-slate-100' : (isPositive ? 'text-emerald-600 bg-emerald-50' : 'text-rose-600 bg-rose-50');
+                const sign = isNeutral ? '' : (isPositive ? '▲' : '▼');
+
+                const itemHTML = `
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="p-2.5 bg-white rounded-xl shadow-sm text-lg flex items-center justify-center">
+                                <i class="fa-solid ${item.icon} text-slate-700"></i>
+                            </span>
+                            <div>
+                                <h6 class="font-bold text-slate-800 text-sm">${item.name}</h6>
+                                <p class="text-[11px] text-slate-400">투자금: ${item.invested.toLocaleString()} 원 | ${item.details}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="px-2.5 py-1 text-xs font-black rounded-lg ${yieldClass}">${sign} ${formatYield(item.rate)}</span>
+                            <div class="text-xs font-bold text-slate-700 mt-1.5">
+                                ➡️ ${item.outcome.toLocaleString()} 원
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += itemHTML;
+            }
+        });
+
+        // Add visual indicators for cash holding, inflation erosion
+        if (cash > 0) {
+            container.innerHTML += `
+                <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <span class="p-2.5 bg-white rounded-xl shadow-sm text-lg flex items-center justify-center text-slate-500">
+                            💵
+                        </span>
+                        <div>
+                            <h6 class="font-bold text-slate-800 text-sm">보관 현금 (미투자분)</h6>
+                            <p class="text-[11px] text-slate-400">물가상승률(인플레이션 연 2% 페널티) 적용에 따른 자산가치 실질적 감소</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="px-2.5 py-1 text-xs font-black rounded-lg text-rose-500 bg-rose-50">-2.0%</span>
+                        <div class="text-xs font-bold text-slate-700 mt-1.5">
+                            ➡️ ${rcs.toLocaleString()} 원
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Fill Total Board Elements
+        document.getElementById('rep-invested-outcome').innerText = (rs + ret + rrt + rte + rgd + rcr).toLocaleString() + " 원";
+        document.getElementById('rep-cash').innerText = rcs.toLocaleString() + " 원";
+        document.getElementById('rep-debt-total').innerText = currentDebt > 0 ? `-${totalDebt.toLocaleString()} 원` : "0 원";
+        document.getElementById('rep-inflation-loss').innerText = `-${infLoss.toLocaleString()} 원`;
+        
+        currentDebt = totalDebt; 
+        netAssets = (rs + ret + rrt + rte + rgd + rcr + rcs) - currentDebt; 
+
+        document.getElementById('report-total-display').innerText = netAssets.toLocaleString() + " 원";
+        document.getElementById('report-mentor-advice').innerText = scen.advice;
+
+        // Button Transition Routing Control
+        const nextBtn = document.getElementById('btn-next-step');
+        if (currentRound < 5) {
+            nextBtn.innerText = `Year ${currentRound + 1} 라운드로 포트폴리오 이월 진행 ➡️`;
+        } else {
+            nextBtn.innerText = "최종 5개년 누적 자산 평가 진단서 확인 📊";
+        }
+
+        showScreen('screen-report');
+    }
+
+    // Step Routing Controller
+    function proceedToNextRound() {
+        if (currentRound < 5) {
+            currentRound++;
+            loadRound();
+            showScreen('screen-game');
+        } else {
+            showFinalResults();
+        }
+    }
+
+    // High School Target Final Evaluator
+    function showFinalResults() {
+        // Resolve final obligation balances automatically at the wrap-up
+        if (currentDebt > 0) {
+            netAssets = netAssets; 
+            showToast(`게임 최종 종료에 따라 누적 신용 대출 상환금 ${currentDebt.toLocaleString()} 원이 자동으로 전액 회수 상환되었습니다.`, "ℹ️");
+            currentDebt = 0;
+        }
+
+        const netYieldPercent = ((netAssets - INITIAL_ASSETS) / INITIAL_ASSETS * 100).toFixed(1);
+        const finalAssetsLabel = document.getElementById('final-assets');
+        const finalYieldLabel = document.getElementById('final-yield');
+
+        finalAssetsLabel.innerText = netAssets.toLocaleString() + " 원";
+
+        if (netAssets >= INITIAL_ASSETS) {
+            finalYieldLabel.innerText = `+${netYieldPercent}%`;
+            finalYieldLabel.className = "text-emerald-500 font-extrabold";
+            document.getElementById('final-icon').innerText = "🏆";
+        } else {
+            finalYieldLabel.innerText = `${netYieldPercent}%`;
+            finalYieldLabel.className = "text-rose-500 font-extrabold";
+            document.getElementById('final-icon').innerText = "📉";
+        }
+
+        // Student Financial Mindset Diagnostic Engine (Enhanced categories)
+        let archetype = "";
+        let analysis = "";
+
+        if (netAssets > 22000000) {
+            archetype = "🎖️ 헤지펀드 거장급 자산 배분의 달인";
+            analysis = `상상을 초월하는 매크로 시황 해독 능력을 증명했습니다! 금리가 저렴할 때는 적극적으로 대출(레버리지)을 유치하여 고성장 기술주와 리츠 부동산의 상승 여력을 독차지했고, 스태그플레이션 위기에는 안전자산인 금으로 자산을 영리하게 수비 분배했습니다. 위기에 금을 사고 평화로울 때 투자처를 다각화하는 거장급 감각입니다!`;
+        } else if (netAssets > 15000000) {
+            archetype = "🤝 대형 증권사 수석 자산관리사(PB)";
+            analysis = `훌륭한 분산투자 감각과 리스크 제어 능력을 보여주었습니다. 특히 부동산 리츠가 금리 인상에 취약하다는 점과 인플레이션 상황에서의 안전자산인 금의 성격을 완벽히 간파해 냈습니다. 빚더미 고금리의 위협을 잘 조절하여 안정적인 순자산을 불린 수재입니다!`;
+        } else if (netAssets >= 10000000) {
+            archetype = "🐢 원금 보장형 보수파 디펜더";
+            analysis = `극심한 변동성의 장세와 물가상승 페널티 속에서도 자신의 종잣돈을 끝까지 온전히 보전해 냈습니다! 위험한 가상자산 단타 거래나 무리한 빚투를 자제하여 잃지 않는 기틀을 닦았으나, 금리 변동성에 대처하는 예금 리밸런싱이나 기회비용 활용에 조금 더 공격적으로 대응했다면 더 나은 자산 확장이 가능했을 것입니다.`;
+        } else if (netAssets > 4000000) {
+            archetype = "🤕 빚투와 투기의 늪에 잠긴 개미 투자자";
+            analysis = `가상자산과 기술주의 거품 랠리에 눈이 멀어 분산투자를 무시하고 몰빵 투자를 하거나, 연 12%의 고이자가 청구되는 빅스텝 시기에 부채(대출)를 제때 상환하지 않고 버티다 이자 폭탄을 맞았습니다. 실제 투자에서도 부채 이자의 무서움과 다각화의 절대적 수비를 깊이 깨닫는 좋은 계기가 되기를 바랍니다!`;
+        } else {
+            archetype = "🚨 금융 파산 (신용불량 경고 등급)";
+            analysis = `과도한 레버리지 중독과 초고위험 암호화폐에 자산을 전액 배팅하여 결국 자산이 부채를 갚지 못할 만큼 잠식되는 파산을 맞이했습니다. 레버리지는 성장을 돕는 촉진제이기도 하지만, 시장을 오독하고 이자가 오를 때 신용 관리를 제때 하지 못하면 가정을 순식간에 무너뜨리는 흉기가 된다는 사실을 절대 잊어서는 안 됩니다!`;
+        }
+
+        document.getElementById('final-grade-title').innerText = archetype;
+        document.getElementById('debriefing-text').innerText = analysis;
+
+        showScreen('screen-final');
+    }
+
+    function resetGame() {
+        showScreen('screen-tutorial');
+    }
+
+    window.onload = function() {
+        resetGame();
+    }
+</script>
+
+</body>
+</html>
